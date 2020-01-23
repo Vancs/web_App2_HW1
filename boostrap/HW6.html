@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+  $(document).ready(function(){
+    //alert("jQuery loaded");
+    var total = 0;
+    var addition = new Object;
+    var subtraction = new Object;
+    var numbers = new Object;
+    var numbers = {};
+
+    numbers = {
+    "One": {
+      "display": "One",
+      "posValue": 1,
+      "negValue": -1
+    },
+    "Two": {
+      "display": "Two",
+      "posValue": 2,
+      "negValue": -2
+    },
+    "Three": {
+      "display": "Three",
+      "posValue": 3,
+      "negValue": -3
+    },
+    "Four": {
+      "display": "Four",
+      "posValue": 4,
+      "negValue": -4
+    },
+    "Five": {
+      "display": "Five",
+      "posValue": 5,
+      "negValue": -5
+    }
+  }
+  for ( i in numbers){
+    disp = numbers[i].display;
+    $("#numbers").append(new Option(disp, i, true, true));
+  }
+
+    $("#plus").click(function() {
+      //alert("Clicked plus");
+      var pos = $("input:radio[name='radio_noNeg']:checked").val();
+       posnumbervalue = $('#numbers :selected').val();
+       a=addition[pos];
+       doAddition = numbers[posnumbervalue].posValue;
+       var POSdisplayCalculation = "<b> </b> Adding:"
+       POSdisplayCalculation += doAddition;
+       POSdisplayCalculation += "+";
+       POSdisplayCalculation += total;
+       POSdisplayCalculation += "=";
+       if (pos === 'NoNegatives' & total < 0){
+         alert("No Negatives");
+       }else{
+         total += doAddition
+         POSdisplayCalculation += total;
+       $("#output").html(POSdisplayCalculation);
+       if(total < 0 ){
+         $("#changing_numb").html(total)
+         .css("background-color", "red");
+       } else if (total > 0) {
+         $("#changing_numb").html(total)
+         .css("background-color", "blue");
+       } else {
+         $("#changing_numb").html(total)
+         .css("background-color", "yellow");
+       }
+     }
+    });
+
+    $("#subtract").click(function() {
+      //alert("Clicked subtract");
+      var neg = $("input:radio[name='radio_noNeg']:checked").val();
+       negnumbervalue = $('#numbers :selected').val();
+       s=subtraction[neg];
+       doSubtraction = numbers[negnumbervalue].negValue;
+       var NEGdisplayCalculation = "<b> </b> Subtracting:"
+       NEGdisplayCalculation += doSubtraction;
+       NEGdisplayCalculation += "+";
+       NEGdisplayCalculation += total;
+       NEGdisplayCalculation += "=";
+       if (neg === 'radio_noNeg' & total <= 0){
+         alert("No Negatives");
+       }else{
+         total += doSubtraction;
+         NEGdisplayCalculation += total;
+       $("#output").html(NEGdisplayCalculation);
+       if(total < 0 ){
+         $("#changing_numb").html(total)
+         .css("background-color", "red");
+       } else if (total > 0) {
+         $("#changing_numb").html(total)
+         .css("background-color", "blue");
+       } else {
+         $("#changing_numb").html(total)
+         .css("background-color", "yellow");
+       }
+     }
+  });
+
+    });
+    </script>
+
+    <title>Jquery Calculator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar-top-fixed.css" rel="stylesheet">
+    <style>
+    #changing_numb {
+      border: dotted 1px black;
+      background-color: yellow;
+      font-size: 40px;
+      padding-top: 40px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 40px;
+    }
+  #subtract{
+    background-color: red
+  }
+
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">JQuery Calculator</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <h1>JQuery Calculator</h1>
+      </div>
+      <br><br>
+
+      <span style="border: dotted 1px black" id="changing_numb">0</span>
+    </div>
+  </div>
+
+  <button type="button" id="plus" class="btn btn-info btn-lg">
+    <span class="glyphicon glyphicon-plus"></span> Add
+
+  </button>
+  <button type="button" id="subtract" class="btn btn-info btn-lg">
+    <span class="glyphicon glyphicon-minus"></span> Subtract
+  </button>
+
+  <input type="radio" name="posNumb" value="radio_override"> Override negatives
+  <input type="radio" name="negnumb" value="radio_noNeg"> No Negatives
+  <br><br>
+  <select id="numbers" name="numbers">
+  </select>
+  <br> <br>
+<div class="jumbotron">
+  <div class="container">
+    <p id="output">0</p>
+  </div>
+</div>
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
